@@ -2,6 +2,8 @@ package com.michael.customer.service;
 
 import com.michael.clients.fraud.FraudCheckResponse;
 import com.michael.clients.fraud.FraudClient;
+import com.michael.clients.notification.NotificationClient;
+import com.michael.clients.notification.NotificationRequest;
 import com.michael.customer.entity.Customer;
 import com.michael.customer.payload.request.CustomerRegistrationRequest;
 
@@ -21,6 +23,10 @@ public class CustomerService {
     private final RestTemplate restTemplate;
     @Autowired
     private final FraudClient fraudClient;
+
+    @Autowired
+    private final NotificationClient notificationClient;
+
 
     public void registerCustomer(CustomerRegistrationRequest customerRequest) {
 
@@ -46,9 +52,15 @@ public class CustomerService {
             throw new IllegalStateException("Fraudster");
         }
 
+        notificationClient.sendNotification(
+                new NotificationRequest(
+                        customer.getId(),
+                        customer.getEmail(),
+                        String.format("Hi %s, welcome to Amigoscode...",
+                                customer.getFirstName())
+                )
+        );
         //TODO: send notification
-
-
     }
 
 }
