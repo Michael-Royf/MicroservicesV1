@@ -1,4 +1,4 @@
-package com.michael.fraud.payload.response;
+package com.michael.clients.fraud;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

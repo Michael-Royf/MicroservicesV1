@@ -1,8 +1,10 @@
 package com.michael.customer.service;
 
+import com.michael.clients.fraud.FraudCheckResponse;
+import com.michael.clients.fraud.FraudClient;
 import com.michael.customer.entity.Customer;
 import com.michael.customer.payload.request.CustomerRegistrationRequest;
-import com.michael.customer.payload.response.FraudCheckResponse;
+
 import com.michael.customer.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,8 @@ public class CustomerService {
     private final CustomerRepository customerRepository;
     @Autowired
     private final RestTemplate restTemplate;
+    @Autowired
+    private final FraudClient fraudClient;
 
     public void registerCustomer(CustomerRegistrationRequest customerRequest) {
 
@@ -30,11 +34,13 @@ public class CustomerService {
         //TODO: check if fraudster
         customerRepository.saveAndFlush(customer);
 
-        FraudCheckResponse fraudCheckResponse = restTemplate.getForObject(
-                "http://FRAUD/api/v1/fraud-check/{customerId}",
-                FraudCheckResponse.class,
-                customer.getId()
-        );
+//        FraudCheckResponse fraudCheckResponse = restTemplate.getForObject(
+//                "http://FRAUD/api/v1/fraud-check/{customerId}",
+//                FraudCheckResponse.class,
+//                customer.getId()
+//        );
+
+        FraudCheckResponse fraudCheckResponse = fraudClient.isFraudster(customer.getId());
 
         if (fraudCheckResponse.isFraudster()) {
             throw new IllegalStateException("Fraudster");
