@@ -1,0 +1,5 @@
+com\michael\clients\fraud\FraudCheckResponse.class
+com\michael\clients\fraud\FraudClient.class
+com\michael\clients\notification\NotificationRequest$NotificationRequestBuilder.class
+com\michael\clients\notification\NotificationRequest.class
+com\michael\clients\notification\NotificationClient.class

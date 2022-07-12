@@ -1,0 +1,9 @@
+com\michael\customer\controller\CustomerController.class
+com\michael\customer\service\CustomerService.class
+com\michael\customer\entity\Customer.class
+com\michael\customer\payload\request\CustomerRegistrationRequest.class
+com\michael\customer\CustomerApplication.class
+com\michael\customer\payload\request\CustomerRegistrationRequest$CustomerRegistrationRequestBuilder.class
+com\michael\customer\entity\Customer$CustomerBuilder.class
+com\michael\customer\repository\CustomerRepository.class
+com\michael\customer\config\CustomConfig.class
