@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class NotificationController {
     @Autowired
     private final NotificationService notificationService;
+
+
     @PostMapping
     public void sendNotification(@RequestBody NotificationRequest notificationRequest) {
         log.info("New notification... {}", notificationRequest);
